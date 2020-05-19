@@ -6,7 +6,7 @@ import java.net.*;
 public class ChatServer {
 
     public static void main(String[] args) throws IOException {
-        Socket socketA, socketB, socket;
+        Socket socket;
         ServerSocket s = new ServerSocket(Configuration.PORT);
         System.out.println("Started: " + s);
         ClientRepository clients = new ClientRepository();
@@ -43,6 +43,8 @@ public class ChatServer {
                     json.put("type", "join");
                     json.put("value", "Connected");
                     out.println(json.toString());
+
+                    new ThreadServer(in, clients, user).start();
                 }
                 else {
                     System.out.println(user + " duplicate");
@@ -51,8 +53,6 @@ public class ChatServer {
                     out.println(json.toString());
                 }
 
-
-                new ThreadServer(in, clients, user).start();
             }
         }
         finally {

@@ -102,7 +102,7 @@ public class ChatClientGUI extends JFrame {
             messageField.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent e) {
-                    int n = nameField.getText().length();
+                    int n = messageField.getText().length();
                     send.setEnabled(n > 0 ? true : false);
                 }
             });
